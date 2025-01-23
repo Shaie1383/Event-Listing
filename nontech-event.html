@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Technical Events - Ripple 2024</title>
+    <style>
+        body {
+            background-color: rgb(245, 241, 241);
+            color: black;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .event-container {
+            width: 80%;
+        }
+        .event-card {
+            background-color: rgba(253, 254, 255, 0.995);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .event-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .event-description {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .register-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .register-btn[disabled] {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+        #registration-form {
+            display: none;
+            background-color: rgba(253, 254, 255, 0.995);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-top: 20px;
+        }
+        #registration-form input, #registration-form select, #registration-form button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #registration-form button {
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Non-Technical Events - Ripple 2024</h1>
+
+    <div class="event-container">
+        <!-- Stalls Event -->
+        <div class="event-card">
+            <img src="stalls.jpg" alt="Stalls Event">
+            <h2>Stalls</h2>
+            <p class="event-description">
+                Explore various stalls showcasing innovative ideas and products.
+                <br>Per stall fee: 2000
+                <br>Team size: 5 members
+            </p>
+            <button class="register-btn" onclick="showForm(this, 'Stalls')">Register</button>
+        </div>
+
+        <!-- Treasure Hunt Event -->
+        <div class="event-card">
+            <img src="treasurehunt.jpg" alt="Treasure Hunt Event">
+            <h2>Treasure Hunt</h2>
+            <p class="event-description">
+                Participate in an exciting treasure hunt challenge filled with clues and fun activities.
+                <br>Team size: 5 members
+                <br>Time limit: 1 hour
+                <br>Per team fee: 500
+            </p>
+            <button class="register-btn" onclick="showForm(this, 'Treasure Hunt')">Register</button>
+        </div>
+
+        <!-- Dance Event -->
+        <div class="event-card">
+            <img src="dance.jpg" alt="Dance Event">
+            <h2>Dance</h2>
+            <p class="event-description">
+                Showcase your dancing skills and join the energetic dance competition.
+                <br>Individual participation
+                <br>No cost for registration
+            </p>
+            <button class="register-btn" onclick="showForm(this, 'Dance')">Register</button>
+        </div>
+
+        <!-- Flash Mob Event -->
+        <div class="event-card">
+            <img src="flashmob.jpg" alt="Flash Mob Event">
+            <h2>Flash Mob</h2>
+            <p class="event-description">
+                Join the spontaneous and fun-filled flash mob performance.
+                <br>Individual participation
+                <br>No cost for participation
+            </p>
+            <button class="register-btn" onclick="showForm(this, 'Flash Mob')">Register</button>
+        </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="registration-form">
+        <h2>Register for <span id="event-name"></span></h2>
+        <form onsubmit="submitForm(event)">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="text" id="regno" name="regno" placeholder="Registration Number" required>
+            <input type="email" id="email" name="email" placeholder="Email ID" required>
+            <input type="tel" id="mobile" name="mobile" placeholder="Mobile Number" required>
+            <select id="year" name="year" required>
+                <option value="">Select Year</option>
+                <option value="1st">1st Year</option>
+                <option value="2nd">2nd Year</option>
+                <option value="3rd">3rd Year</option>
+                <option value="4th">4th Year</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        let currentButton = null;
+
+        // Function to display the registration form
+        function showForm(button, eventName) {
+            document.getElementById('registration-form').style.display = 'block';
+            document.getElementById('event-name').innerText = eventName;
+            currentButton = button; // Keep track of the button clicked
+        }
+
+        // Function to handle form submission
+        function submitForm(event) {
+            event.preventDefault(); // Prevent page refresh
+
+            // Validate the form (already enforced by "required" attributes)
+            const name = document.getElementById('name').value;
+            const regno = document.getElementById('regno').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            const year = document.getElementById('year').value;
+
+            if (name && regno && email && mobile && year) {
+                // Update the button to "Registered"
+                if (currentButton) {
+                    currentButton.innerText = 'Registered';
+                    currentButton.disabled = true;
+                }
+
+                // Hide the form
+                document.getElementById('registration-form').style.display = 'none';
+
+                // Clear form fields
+                document.getElementById('name').value = '';
+                document.getElementById('regno').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('mobile').value = '';
+                document.getElementById('year').value = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
